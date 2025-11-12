@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PodcastController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,22 @@ Route::controller(PodcastController::class)->group(function(){
 });
 
 Route::controller(AuthController::class)->group(function(){
-  Route::post('register/create','register');
+  Route::post('register','register');
   Route::post('login','login');
   Route::post('logout','logout')->middleware('auth:sanctum');
+  Route::put('reset/password/{id}','restPassword');
+});
+
+Route::middleware('auth:sanctum')->group(function(){
+  Route::get('users',[UserController::class,'index']);
+  Route::post('users/create',[UserController::class,'store']);
+  Route::get('users/show/{id}',[UserController::class,'show']);
+  Route::put('users/update/{id}',[UserController::class,'update']);
+  Route::delete('users/delete/{id}',[UserController::class,'destroy']);
+
+  Route::controller(PodcastController::class)->group(function(){
+    Route::get('podcasts','index');
+    Route::post('podcasts/create','store');
+    Route::get('podcasts/my-podcast','show');
+  });
 });

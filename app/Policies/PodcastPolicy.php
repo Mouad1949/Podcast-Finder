@@ -21,7 +21,7 @@ class PodcastPolicy
      */
     public function view(User $user, Podcast $podcast): bool
     {
-        //
+        // return $user->id === $podcast->user_id || $user->role === 'admin';
     }
 
     /**

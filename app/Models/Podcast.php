@@ -12,7 +12,9 @@ class Podcast extends Model
     protected $fillable = [
       'title',
       'description',
-      'image'
+      'image',
+      'catégorie',
+      'user_id'
     ];
 
     public function user(){
