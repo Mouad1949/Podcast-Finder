@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -42,6 +43,14 @@ Route::middleware('auth:sanctum')->group(function(){
   Route::controller(PodcastController::class)->group(function(){
     Route::get('podcasts','index');
     Route::post('podcasts/create','store');
-    Route::get('podcasts/my-podcast','show');
+    Route::get('podcasts/details/{id}','show');
+    Route::put('podcasts/update/{id}','update');
+    Route::delete('podcasts/delete/{id}','destroy');
   });
+
+  Route::post('episodes/{id}/create',[EpisodeController::class ,'store']);
+  Route::put('episodes/{id}/update',[EpisodeController::class ,'update']);
+  Route::delete('episodes/{id}/delete',[EpisodeController::class ,'destroy']);
 });
+Route::get('podcasts/{id}/episodes',[EpisodeController::class ,'index']);
+Route::get('episodes/{id}',[EpisodeController::class ,'show']);

@@ -11,7 +11,7 @@ class StoreEpisodeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,19 @@ class StoreEpisodeRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+          return [
+          'title' => 'required|min:3|unique:podcasts,title',
+          'description' => 'required|string',
+          'audio' => 'required|mimes:mp3,wav,ogg'
         ];
+
+        }
+        public function messages(){
+          return[
+           'title.required' => 'Le title est obligatoire.',
+            'title.unique' => 'Le title existe déjà.',
+            'description.required' => 'La description est obligatoire.',
+            'audio.required' => 'L\'audio est obligatoire.',
+          ];
     }
 }

@@ -130,6 +130,433 @@
                 }
             }
         },
+        "/api/episodes": {
+            "get": {
+                "tags": [
+                    "Episode"
+                ],
+                "summary": "Liste des episodes",
+                "operationId": "39bb119c426c59c593560bf467c00fe9",
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "timestamp": {
+                                            "type": "string",
+                                            "example": "2025-10-13 08:35:00"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Episode retrieved successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/episodes/create": {
+            "post": {
+                "tags": [
+                    "create episodes"
+                ],
+                "summary": "Add episodes",
+                "operationId": "1d9365d31563dcb871316524caa8d065",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "audio"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "dev"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "text tets"
+                                    },
+                                    "audio": {
+                                        "type": "string",
+                                        "example": "https//images/music.mp3"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "episode created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "timestamp": {
+                                            "type": "string",
+                                            "example": "2025-10-13 11:20:00"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "episodes created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "episode not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Failed"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "episode not found"
+                                        },
+                                        "timestamp": {
+                                            "type": "string",
+                                            "example": "2025-10-13 11:45:00"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/podcasts": {
+            "get": {
+                "tags": [
+                    "Podcast"
+                ],
+                "summary": "Liste des podcasts",
+                "operationId": "28abe6e0a78fe6785659a51dde99679e",
+                "responses": {
+                    "200": {
+                        "description": "Succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "timestamp": {
+                                            "type": "string",
+                                            "example": "2025-10-13 08:35:00"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Podcast retrieved successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/podcasts/create": {
+            "post": {
+                "tags": [
+                    "create podcasts"
+                ],
+                "summary": "Add podcasts",
+                "operationId": "f60ae6bccb4f17d7469bf6e52d6df09b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "catégorie",
+                                    "image"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "dev"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "text tets"
+                                    },
+                                    "catégorie": {
+                                        "type": "string",
+                                        "example": "devlo"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "example": "https//images/logo.png"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "podcast created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "timestamp": {
+                                            "type": "string",
+                                            "example": "2025-10-13 11:20:00"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "podcasts created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "podcast not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Failed"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "podcast not found"
+                                        },
+                                        "timestamp": {
+                                            "type": "string",
+                                            "example": "2025-10-13 11:45:00"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/podcasts/update/{id}": {
+            "put": {
+                "tags": [
+                    "update podcasts"
+                ],
+                "summary": "update podcasts",
+                "operationId": "b8fdc2490ce1ba2c9a0bf4b989da61b8",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the podcast to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 101
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "catégorie",
+                                    "image"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "example": "dev"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "text tets"
+                                    },
+                                    "catégorie": {
+                                        "type": "string",
+                                        "example": "devlo"
+                                    },
+                                    "image": {
+                                        "type": "string",
+                                        "example": "https//images/logo.png"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "podcast update successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "timestamp": {
+                                            "type": "string",
+                                            "example": "2025-10-13 11:20:00"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "podcasts update successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "podcast not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Failed"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "podcast not found"
+                                        },
+                                        "timestamp": {
+                                            "type": "string",
+                                            "example": "2025-10-13 11:45:00"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/podcasts/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "delete podcast"
+                ],
+                "summary": "delete podcast",
+                "operationId": "0387bb614be3ec647e72c2d5a69e0793",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the podcast to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 101
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "podcast delete successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Success"
+                                        },
+                                        "timestamp": {
+                                            "type": "string",
+                                            "example": "2025-10-13 11:20:00"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "podcasts delete successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "podcast not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Failed"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "podcasts not found"
+                                        },
+                                        "timestamp": {
+                                            "type": "string",
+                                            "example": "2025-10-13 11:45:00"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/users": {
             "get": {
                 "tags": [
@@ -224,6 +651,30 @@
                                         "message": {
                                             "type": "string",
                                             "example": "users created successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "user not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "Failed"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "users not found"
+                                        },
+                                        "timestamp": {
+                                            "type": "string",
+                                            "example": "2025-10-13 11:45:00"
                                         }
                                     },
                                     "type": "object"
@@ -408,6 +859,30 @@
         {
             "name": "reset password",
             "description": "reset password"
+        },
+        {
+            "name": "Episode",
+            "description": "Episode"
+        },
+        {
+            "name": "create episodes",
+            "description": "create episodes"
+        },
+        {
+            "name": "Podcast",
+            "description": "Podcast"
+        },
+        {
+            "name": "create podcasts",
+            "description": "create podcasts"
+        },
+        {
+            "name": "update podcasts",
+            "description": "update podcasts"
+        },
+        {
+            "name": "delete podcast",
+            "description": "delete podcast"
         },
         {
             "name": "Users",

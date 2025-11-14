@@ -75,6 +75,16 @@ class UserController extends Controller
  *             @OA\Property(property="message", type="string", example="users created successfully")
  *         )
  *     ),
+ *    @OA\Response(
+ *         response=404,
+ *         description="user not found",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="status", type="string", example="Failed"),
+ *             @OA\Property(property="message", type="string", example="users not found"),
+ *             @OA\Property(property="timestamp", type="string", example="2025-10-13 11:45:00")
+ *         )
+ *     ),
        * 
  * )
  */
@@ -158,7 +168,7 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
 
-      if(!Gate::allows('create',User::class)){
+      if(!Gate::allows('update',User::class)){
           return "You don't have access for update role user";
         }
         $user = User::find($id);

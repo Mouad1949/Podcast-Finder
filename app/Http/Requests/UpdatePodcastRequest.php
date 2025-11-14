@@ -11,7 +11,7 @@ class UpdatePodcastRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class UpdatePodcastRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+              'title' => 'min:3|unique:podcasts,title',
+          'description' => 'string',
+          'catégorie' => 'min:4|string',
+          'image' => [
+                        'image',
+                        'mimes:jpg,png,jpeg,gif,svg',
+                       ],
         ];
+        
     }
 }

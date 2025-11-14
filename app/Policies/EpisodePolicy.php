@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Episode;
+use App\Models\Podcast;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -21,7 +22,7 @@ class EpisodePolicy
      */
     public function view(User $user, Episode $episode): bool
     {
-        //
+        
     }
 
     /**
@@ -29,7 +30,7 @@ class EpisodePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return in_array($user->role ,['animateur','admin']);
     }
 
     /**
@@ -37,15 +38,15 @@ class EpisodePolicy
      */
     public function update(User $user, Episode $episode): bool
     {
-        //
+        return $user->role === 'admin' || ($user->role === 'aminateur' && $episode->podcast->user_id === $user->id);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Episode $episode): bool
+    public function delete(User $user, Episode $episode ,Podcast $podcast): bool
     {
-        //
+        return $user->role === 'admin' || ($user->role === 'aminateur' && $episode->podcast->user_id === $user->id);
     }
 
     /**
