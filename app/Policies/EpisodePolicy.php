@@ -30,23 +30,23 @@ class EpisodePolicy
      */
     public function create(User $user): bool
     {
-        return in_array($user->role ,['animateur','admin']);
+        return in_array($user->role,['admin', 'animateur']);
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Episode $episode): bool
+    public function update(User $user, Episode $episode ): bool
     {
-        return $user->role === 'admin' || ($user->role === 'aminateur' && $episode->podcast->user_id === $user->id);
+        return $user->role === 'admin' || ($user->role === 'animateur' && $user->id === $episode->podcast->user_id);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Episode $episode ,Podcast $podcast): bool
+    public function delete(User $user, Episode $episode): bool
     {
-        return $user->role === 'admin' || ($user->role === 'aminateur' && $episode->podcast->user_id === $user->id);
+        return $user->role === 'admin' || ($user->role === 'animateur' && $user->id === $episode->podcast->user_id);
     }
 
     /**

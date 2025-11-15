@@ -35,7 +35,7 @@ class UserController extends Controller
             return response()->json([
               "messges"=>"List all users",
               "users"=>$users
-            ]);
+            ],200);
         }else{
           return "You don't have access";
         }
@@ -100,7 +100,7 @@ class UserController extends Controller
         $user->password = $request->password;
 
         $user->save();
-        return response()->json(["messages" => "Add user is seccussefuly" ,"user"=>$user]);
+        return response()->json(["messages" => "Add user is seccussefuly" ,"user"=>$user],201);
 
     }
 
@@ -110,11 +110,12 @@ class UserController extends Controller
     
     public function show(string $id ,User $user)
     { 
-        if(!Gate::allows('view',$user)){
+      
+        $user = User::find($id);
+          if(!Gate::allows('view',$user)){
           return "You don't have access";
         }
-        $user = User::find($id);
-        return $user;
+         return response()->json($user, 200);
     }
 
     /**
@@ -165,16 +166,21 @@ class UserController extends Controller
        * 
  * )
  */
-    public function update(Request $request, string $id)
+    public function update(Request $request,User $user , string $id)
     {
 
-      if(!Gate::allows('update',User::class)){
-          return "You don't have access for update role user";
-        }
+      
         $user = User::find($id);
+        if (!Gate::allows('update', $user)) {
+        return response()->json(["error" => "You don't have access to update this user"], 403);
+      }
+        $user->nom = $request->nom;
+        $user->prenom = $request->prenom;
+        $user->email = $request->email;
         $user->role = $request->role;
+        $user->password = $request->password;
         $user->update();
-        return response()->json(["messages" => "Update role of user is seccussefuly" ,"user"=>$user]);
+        return response()->json(["messages" => "Update user is seccussefuly" ,"user"=>$user],200);
     }
 
     /**
@@ -225,6 +231,6 @@ class UserController extends Controller
           return "You don't have access for delete user";
         }
         $user->delete();
-        return response()->json(["messages" => "Delete user is seccussefuly" ,"user"=>$user->prenom]);
+        return response()->json(["message" => "deleted" ,"user"=>$user->prenom],200);
     }
 }

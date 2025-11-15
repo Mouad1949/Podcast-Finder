@@ -14,6 +14,6 @@ class Episode extends Model
       'audio'
     ];
     public function podcast(){
-      return $this->belongsTo(Podcast::class);
+      return $this->belongsTo(Podcast::class,'podcast_id');
     }
 }

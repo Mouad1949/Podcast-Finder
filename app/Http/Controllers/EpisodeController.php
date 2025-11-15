@@ -7,6 +7,7 @@ use App\Http\Requests\StoreEpisodeRequest;
 use App\Http\Requests\UpdateEpisodeRequest;
 use App\Models\Podcast;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class EpisodeController extends Controller
@@ -18,7 +19,7 @@ class EpisodeController extends Controller
             /**
  * @OA\Get(
  *     path="/api/episodes",
- *     tags={"Episode"},
+ *     tags={"episode"},
  *     summary="Liste des episodes",
  *     @OA\Response(
  *         response=200,
@@ -94,10 +95,11 @@ class EpisodeController extends Controller
  */
     public function store(StoreEpisodeRequest $request, $id ,Episode $episode)
     {
-      if(!Gate::allows('create' ,$episode)){
+    
+      $podcast = Podcast::find($id);
+        if(!Gate::allows('create' ,$episode)){
                 return "You don't have access for create episode";
       }
-      $podcast = Podcast::find($id);
       $uploadAudio = Cloudinary::upload(
           $request->file('audio')->getRealPath(),['resource_type' => 'video']
       );
@@ -134,6 +136,54 @@ class EpisodeController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
+            /**
+ * @OA\Put(
+ *     path="/api/episodes/{id}/update/",
+ *     tags={"update episodes"},
+ *     summary="update episodes",
+ *   @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID of the episode to update",
+ *         @OA\Schema(type="integer", example=101)
+ *     ),
+ *     
+ *        
+ *     @OA\RequestBody(
+  *         required=true,
+  *         @OA\JsonContent(
+  *             required={"title","description","audio"},
+  *             @OA\Property(property="title", type="string", example="Epis"),
+  *             @OA\Property(property="description", type="string", example="text tets"),
+  *             @OA\Property(property="audio", type="string", example="https//audio.mp3"),
+  *        
+  *         )
+  *     ),
+  *     @OA\Response(
+ *         response=200,
+ *         description="episode update successfully",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="status", type="string", example="Success"),
+ *             @OA\Property(property="timestamp", type="string", example="2025-10-13 11:20:00"),
+ *             @OA\Property(property="message", type="string", example="episodes update successfully")
+ *         )
+ *     ),
+ *   @OA\Response(
+ *         response=404,
+ *         description="episode not found",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="status", type="string", example="Failed"),
+ *             @OA\Property(property="message", type="string", example="episode not found"),
+ *             @OA\Property(property="timestamp", type="string", example="2025-10-13 11:45:00")
+ *         )
+ *     ),
+       * 
+ * )
+ */
     public function update(UpdateEpisodeRequest $request, Episode $episode,$id)
     {
       $episode = Episode::find($id);
@@ -160,6 +210,45 @@ class EpisodeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+
+    
+  /**
+ * @OA\Delete(
+ *     path="/api/episodes/{id}/delete",
+ *     tags={"delete episode"},
+ *     summary="delete episode",
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="ID of the episode to delete",
+ *         @OA\Schema(type="integer", example=101)
+ *     ),  
+ *        
+   *     @OA\Response(
+ *         response=200,
+ *         description="episode delete successfully",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="status", type="string", example="Success"),
+ *             @OA\Property(property="timestamp", type="string", example="2025-10-13 11:20:00"),
+ *             @OA\Property(property="message", type="string", example="episodes delete successfully")
+ *         )
+ *     ),
+ *    @OA\Response(
+ *         response=404,
+ *         description="episode not found",
+ *         @OA\JsonContent(
+ *             type="object",
+ *             @OA\Property(property="status", type="string", example="Failed"),
+ *             @OA\Property(property="message", type="string", example="episodes not found"),
+ *             @OA\Property(property="timestamp", type="string", example="2025-10-13 11:45:00")
+ *         )
+ *     ),
+       * 
+ * )
+ */
     public function destroy(Episode $episode , $id)
     {
       $episode = Episode::find($id);
@@ -172,4 +261,10 @@ class EpisodeController extends Controller
         $episode->delete();
         return response()->json(["messages"=>"episode delete ","title episode" =>$episode->title]);
     }
+
+
+  public function searchEpisode(){
+    return "tetst";
+  }
+    
 }

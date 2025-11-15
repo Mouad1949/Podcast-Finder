@@ -242,4 +242,7 @@ class PodcastController extends Controller
         $podcast->delete();
         return response()->json(["messages" => "Delete podcast is seccussefuly" ,"podcast"=>$podcast->title]);
     }
+
+
+  
 }
